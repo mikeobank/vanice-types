@@ -2,9 +2,10 @@ import { fingerprintCharsRegex, nameRegex, nameStartRegex } from "./lib/characte
 import { hashToPrimaryChars, nameToPrimaryChars, primaryCharsToFingerprint } from "./lib/toPrimaryChars.ts"
 import isString from "./lib/utils/isString.ts"
 import getUTF8StringLength from "./lib/utils/getUTF8StringLength.ts"
-import { type PrimaryKey, isPrimaryKey } from "./PrimaryKey.ts"
+import { type PrimaryKey, type PrimaryChars, isPrimaryKey } from "./PrimaryKey.ts"
 
 export type Name = string
+export type PrimaryName = PrimaryChars
 export type Fingerprint = string
 export type FingerprintedName = `${ Name }${ Fingerprint }`
 type AnalyzedName = {
