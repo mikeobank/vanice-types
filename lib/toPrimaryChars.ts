@@ -1,6 +1,6 @@
 import characters from "./characters.json" with { type: "json" }
-import { type PrimaryChars, type PrimaryKey } from "../PrimaryKey.ts"
-import { type Name, type FingerprintedName, type Fingerprint } from "../Name.ts"
+import type { PrimaryChars, PrimaryKey } from "../PrimaryKey.ts"
+import type { Name, FingerprintedName, Fingerprint } from "../Name.ts"
 import { encode } from "./encoding.ts"
 
 export const nameToPrimaryChars = (name: Name | FingerprintedName) : PrimaryChars => {

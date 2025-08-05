@@ -1,6 +1,6 @@
 import { assertEquals } from "https://deno.land/std@0.203.0/assert/mod.ts"
 import { getPublicKey } from "npm:@noble/secp256k1@2.3.0"
-import { sign, verify } from "../../lib/signing.ts"
+import { generateKeyPair, sign, verify } from "../../lib/signing.ts"
 import { publicKeyToPrimaryKey } from "../../PublicKey.ts"
 
 Deno.test("sign and verify roundtrip", async () => {
@@ -27,3 +27,9 @@ Deno.test("sign and verify roundtrip", async () => {
   const isInvalid = verify(primaryKey, "john", signature)
   assertEquals(isInvalid, false)
 })
+
+  Deno.test("generateKeyPair", () => {
+    const [privateKey, publicKey] = generateKeyPair()
+    assertEquals(privateKey instanceof Uint8Array, true)
+    assertEquals(publicKey instanceof Uint8Array, true)
+  })

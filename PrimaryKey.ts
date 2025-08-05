@@ -1,5 +1,5 @@
 import { isFlag } from "./PublicKey.ts"
-import { type Name, type FingerprintedName } from "./Name.ts"
+import type { Name, FingerprintedName } from "./Name.ts"
 import { primaryCharsRegex } from "./lib/characterRegexes.ts"
 import { nameToPrimaryChars } from "./lib/toPrimaryChars.ts"
 import isString from "./lib/utils/isString.ts"

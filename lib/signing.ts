@@ -1,11 +1,13 @@
-import { signAsync, verify as secpVerify } from "@noble/secp256k1"
+import { getPublicKey, signAsync, verify as secpVerify, utils } from "@noble/secp256k1"
 import { sha256 } from "@noble/hashes/sha2"
 import { utf8ToBytes, hexToBytes } from "@noble/hashes/utils"
-import { type PrimaryKey } from "../PrimaryKey.ts"
-import { type Name } from "../Name.ts"
+import type { PrimaryKey } from "../PrimaryKey.ts"
+import type { Name } from "../Name.ts"
+import type { PublicKey } from "../PublicKey.ts"
 import { primaryKeyToPublicKey } from "../PublicKey.ts"
 import isString from "./utils/isString.ts"
 
+export type PrivateKey = Uint8Array
 export type Signature = string
 
 export const isSignature = (value: unknown): value is Signature => {
@@ -37,4 +39,10 @@ export const verify = (primaryKey: PrimaryKey, name: Name, signature: Signature)
     messageHash, 
     primaryKeyToPublicKey(primaryKey)
   )
+}
+
+export const generateKeyPair = () : [PublicKey, PrivateKey] => {
+  const privKey = utils.randomPrivateKey()
+  const pubKey = getPublicKey(privKey)
+  return [pubKey, privKey]
 }

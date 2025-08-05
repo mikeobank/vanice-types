@@ -1,4 +1,4 @@
-import { type PrimaryKey } from "../PrimaryKey.ts"
+import type { PrimaryKey } from "../PrimaryKey.ts"
 import characters from "./characters.json" with { type: "json" }
 
 const CHARS = characters.reduce((acc, { primary }) => {
