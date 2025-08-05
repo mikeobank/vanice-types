@@ -3,6 +3,8 @@ import { encode, decode } from "./lib/encoding.ts"
 import isUint8Array from "./lib/utils/isUint8Array.ts"
 import isNumber from "./lib/utils/isNumber.ts"
 
+export { type Signature, isSignature, sign, verify } from "./lib/signing.ts"
+
 export type PublicKey = Uint8Array
 export type Flag = 2 | 3
 
