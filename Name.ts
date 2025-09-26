@@ -18,7 +18,7 @@ type AnalyzedName = {
 }
 
 const MIN_NAME_LENGTH = 4
-const MIN_FINGERPRINTED_NAME_LENGTH = 4
+const MIN_FINGERPRINTED_NAME_LENGTH = 10
 const MIN_FINGERPRINT_LENGTH = 3
 
 export const isName = (value: unknown): value is Name => {

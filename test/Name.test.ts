@@ -1,6 +1,6 @@
 import { assertEquals } from "https://deno.land/std@0.203.0/assert/mod.ts"
 import { toPrimaryChars } from "../PrimaryKey.ts"
-import { isName, isFingerprint, isAcceptedName, isNameOrFingerprintedName, isFingerprintedName, analyzeFingerprintedName, nameBelongsToPrimaryKey, primaryKeyToFingerprint } from "../Name.ts"
+import { isName, isFingerprint, isAcceptedName, isNameOrFingerprintedName, isFingerprintedName, analyzeFingerprintedName, nameBelongsToPrimaryKey, primaryKeyToFingerprint, primaryKeyToFingerprintedName } from "../Name.ts"
 import mockData from "./data.mock.ts"
 
 Deno.test("isName", () => {
@@ -96,4 +96,9 @@ Deno.test("nameBelongsToPrimaryKey", async () => {
   // Fingerprinted name
   assertEquals(await nameBelongsToPrimaryKey(mockData[0].name, mockData[0].primaryKey), true)
   assertEquals(await nameBelongsToPrimaryKey(mockData[1].name, mockData[1].primaryKey), true)
+})
+
+Deno.test("primaryKeyToFingerprintedName", async () => {
+  assertEquals(await primaryKeyToFingerprintedName(mockData[0].primaryKey, mockData[0].name), mockData[0].fingerprintedName)
+  assertEquals(await primaryKeyToFingerprintedName(mockData[1].primaryKey, mockData[1].name), mockData[1].fingerprintedName)
 })

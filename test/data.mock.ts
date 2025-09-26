@@ -13,10 +13,11 @@ export default [
     90, 233, 103, 50, 103, 117,  16, 13,
     74
   ]),
-  primaryKey: "VAN1C2B5E9HJQPKJADKCK0SD3G7XEHNFYSXKVPQ9CVS6EW8G1N503",
-  name: "Vanic❤️🖋☀️☕⚡",
+  name: "Vanic",
   primaryName: "VAN1C",
-  fingerprint: "❤️🖋☀️☕⚡🔥🎉⚽✈️🌸🌙🏠🏁☃️🖋👑☁️🌸👑🔑☃️🚗☁️🏁⚡😊🚀🌸💡🙏⚽⭐🏁⭐🎁🍴🎉🍴🎉🏠🦋☀️🏁🖋🌲🦋🖋🌲🚀🚀❤️🎁"
+  primaryKey: "VAN1C2B5E9HJQPKJADKCK0SD3G7XEHNFYSXKVPQ9CVS6EW8G1N503",
+  fingerprint: "❤️🖋☀️☕⚡🔥🎉⚽✈️🌸🌙🏠🏁☃️🖋👑☁️🌸👑🔑☃️🚗☁️🏁⚡😊🚀🌸💡🙏⚽⭐🏁⭐🎁🍴🎉🍴🎉🏠🦋☀️🏁🖋🌲🦋🖋🌲🚀🚀❤️🎁",
+  fingerprintedName: "Vanic❤️🖋☀️☕⚡"
 },
 {
   privateKey: new Uint8Array([
@@ -32,9 +33,10 @@ export default [
     124, 114, 201, 255, 164,  17, 148, 233,
      38
   ]),
-  name: "Mike⚡🎵☂🚀☃️🦋",
-  primaryKey: "M1KEU95WVH7KND3TUF7HAH0AFJ2E16BB88M3MY3JS7YT84CMW4K03",
+  name: "Mike",
   primaryName: "MIKE",
-  fingerprint: "⚡🎵☂🚀☃️🦋🌸⭐⏰☕🔥😊🚗🏁🏠🎁😊💪🔥🏁💪🎁🌲🖋☃️☁️🎉⭐👍☀️💡🌸☀️🍴☂🖋⭐❤️🔑🔥⏰🚀🔑🍴🍴🎵🎉⚽🍴🎵💡😊"
+  primaryKey: "M1KEU95WVH7KND3TUF7HAH0AFJ2E16BB88M3MY3JS7YT84CMW4K03",
+  fingerprint: "⚡🎵☂🚀☃️🦋🌸⭐⏰☕🔥😊🚗🏁🏠🎁😊💪🔥🏁💪🎁🌲🖋☃️☁️🎉⭐👍☀️💡🌸☀️🍴☂🖋⭐❤️🔑🔥⏰🚀🔑🍴🍴🎵🎉⚽🍴🎵💡😊",
+  fingerprintedName: "Mike⚡🎵☂🚀☃️🦋"
 }
 ]
