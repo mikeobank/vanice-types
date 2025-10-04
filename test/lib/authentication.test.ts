@@ -1,6 +1,6 @@
-import { assertEquals } from "https://deno.land/std@0.203.0/assert/mod.ts"
-import { getPublicKey } from "npm:@noble/secp256k1@2.3.0"
-import { generateKeyPair, sign, verify } from "../../lib/signing.ts"
+import { assertEquals } from "@std/assert"
+import { getPublicKey } from "@noble/secp256k1"
+import { generateKeyPair, sign, verify } from "../../lib/authentication.ts"
 import { publicKeyToPrimaryKey } from "../../PublicKey.ts"
 
 Deno.test("sign and verify roundtrip", async () => {

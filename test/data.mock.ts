@@ -16,8 +16,8 @@ export default [
   name: "Vanic",
   primaryName: "VAN1C",
   primaryKey: "VAN1C2B5E9HJQPKJADKCK0SD3G7XEHNFYSXKVPQ9CVS6EW8G1N503",
-  fingerprint: "❤️🖋☀️☕⚡🔥🎉⚽✈️🌸🌙🏠🏁☃️🖋👑☁️🌸👑🔑☃️🚗☁️🏁⚡😊🚀🌸💡🙏⚽⭐🏁⭐🎁🍴🎉🍴🎉🏠🦋☀️🏁🖋🌲🦋🖋🌲🚀🚀❤️🎁",
-  fingerprintedName: "Vanic❤️🖋☀️☕⚡"
+  fingerprint: "⏰⚡💪🍴🚗🏠🎄🦋👑🏠⭐🌸⚡🚀🎵☀🦋💡✈✈🏁🏁🌙⭐☃✈⚡⚽🚀☁⚽⏰☕💪☃⚡☕🏁🏠🌸☃🦋🏠🔑🦋💡🎵⚡🎄🌙❤🎁",
+  fingerprintedName: "Vanic⏰⚡💪🍴🚗"
 },
 {
   privateKey: new Uint8Array([
@@ -36,7 +36,15 @@ export default [
   name: "Mike",
   primaryName: "MIKE",
   primaryKey: "M1KEU95WVH7KND3TUF7HAH0AFJ2E16BB88M3MY3JS7YT84CMW4K03",
-  fingerprint: "⚡🎵☂🚀☃️🦋🌸⭐⏰☕🔥😊🚗🏁🏠🎁😊💪🔥🏁💪🎁🌲🖋☃️☁️🎉⭐👍☀️💡🌸☀️🍴☂🖋⭐❤️🔑🔥⏰🚀🔑🍴🍴🎵🎉⚽🍴🎵💡😊",
-  fingerprintedName: "Mike⚡🎵☂🚀☃️🦋"
+  fingerprint: "✈❤💡🏁🏠💪🌲☕👑⚽🔥🙏🏁☁👍🎉🎁⚡🙏❤🔑🏁🔑🖋🚀🎁☃☂🌸💪🌸😊✈⭐🎵⚡☂💪☕✈🎁🏁🏁💡🚀🌸😊👍🌸🚀☀😊",
+  fingerprintedName: "Mike✈❤💡🏁🏠💪"
 }
 ]
+
+/*
+import { primaryKeyToFingerprint, primaryKeyToFingerprintedName } from "../Name.ts"
+console.log(await primaryKeyToFingerprint("VAN1C2B5E9HJQPKJADKCK0SD3G7XEHNFYSXKVPQ9CVS6EW8G1N503"))
+console.log(await primaryKeyToFingerprintedName("VAN1C2B5E9HJQPKJADKCK0SD3G7XEHNFYSXKVPQ9CVS6EW8G1N503", "Vanic"))
+console.log(await primaryKeyToFingerprint("M1KEU95WVH7KND3TUF7HAH0AFJ2E16BB88M3MY3JS7YT84CMW4K03"))
+console.log(await primaryKeyToFingerprintedName("M1KEU95WVH7KND3TUF7HAH0AFJ2E16BB88M3MY3JS7YT84CMW4K03", "Mike"))
+*/

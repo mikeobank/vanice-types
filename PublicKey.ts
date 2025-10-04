@@ -1,9 +1,11 @@
 import { type PrimaryKey, isPrimaryKey } from "./PrimaryKey.ts"
-import { encode, decode } from "./lib/encoding.ts"
+import type { Fingerprint } from "./Name.ts"
 import isUint8Array from "./lib/utils/isUint8Array.ts"
 import isNumber from "./lib/utils/isNumber.ts"
+import { hashToFingerprint, primaryCharsToUint8Array, publicKeyToPrimaryChars } from "./lib/codec.ts"
+import { digest } from "./lib/digest.ts"
 
-export { type Signature, isSignature, sign, verify, generateKeyPair } from "./lib/signing.ts"
+export { type Signature, isSignature, sign, verify, generateKeyPair } from "./lib/authentication.ts"
 
 export type PrivateKey = Uint8Array
 export type PublicKey = Uint8Array
@@ -62,7 +64,7 @@ export const publicKeyToPrimaryKey = (publicKey: PublicKey): PrimaryKey => {
     throw new Error("Invalid PublicKey")
   }
   const [flag, data] = splitPublicKey(publicKey)
-  return appendFlagToPrimaryKey(encode(data), flag)
+  return appendFlagToPrimaryKey(publicKeyToPrimaryChars(data), flag)
 }
 
 export const primaryKeyToPublicKey = (primaryKey: PrimaryKey): PublicKey => {
@@ -70,5 +72,9 @@ export const primaryKeyToPublicKey = (primaryKey: PrimaryKey): PublicKey => {
     throw new Error("Invalid PrimaryKey")
   }
   const [flag, s] = splitPrimaryKey(primaryKey)
-  return prependFlagToPublicKey(decode(s), flag)
+  return prependFlagToPublicKey(primaryCharsToUint8Array(s), flag)
+}
+
+export const publicKeyToFingerprint = async (publicKey: PublicKey): Promise<Fingerprint> => {
+  return hashToFingerprint(await digest(publicKey))
 }

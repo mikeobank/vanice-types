@@ -1,13 +1,15 @@
-import { fingerprintCharsRegex, nameRegex, nameStartRegex } from "./lib/characterRegexes.ts"
-import { hashToPrimaryChars, nameToPrimaryChars, primaryCharsToFingerprint } from "./lib/toPrimaryChars.ts"
+import { displayEmojis, fingerprintAlphabet, nameRegex, nameStartRegex, normalizeEmojis } from "./lib/characters.ts"
+import { nameToPrimaryChars } from "./lib/codec.ts"
 import isString from "./lib/utils/isString.ts"
 import getUTF8StringLength from "./lib/utils/getUTF8StringLength.ts"
 import { type PrimaryKey, type PrimaryChars, isPrimaryKey } from "./PrimaryKey.ts"
+import { primaryKeyToPublicKey, publicKeyToFingerprint } from "./PublicKey.ts";
 
 export type Name = string
 export type PrimaryName = PrimaryChars
 export type Fingerprint = string
-export type FingerprintedName = `${ Name }${ Fingerprint }`
+export type FingerprintDisplay = string
+export type FingerprintedName = `${ Name }${ FingerprintDisplay }`
 type AnalyzedName = {
   name: Name
   fingerprintedName: FingerprintedName, 
@@ -25,9 +27,23 @@ export const isName = (value: unknown): value is Name => {
   return isString(value) && value.length > 0 && nameRegex.test(value)
 }
 
-export const isFingerprint = (value: unknown): value is Fingerprint => {
-  return isString(value) && value.length > 0 && fingerprintCharsRegex.test(value)
+export const normalizeFingerprint = (fingerprint: FingerprintDisplay): Fingerprint => {
+  return normalizeEmojis(fingerprint)
 }
+
+export const displayFingerprint = (fingerprint: Fingerprint): FingerprintDisplay => {
+  return displayEmojis(fingerprint)
+}
+
+export const isFingerprint = (value: unknown): value is Fingerprint => {
+  if (!isString(value) || value.length === 0) return false
+  const allowedChars = new Set(Array.from(fingerprintAlphabet))
+  return Array.from(value).every(char => allowedChars.has(char))
+}
+
+export const isFingerprintDisplay = (value: unknown): value is FingerprintDisplay => {
+  return isString(value) && isFingerprint(normalizeFingerprint(value)) && value === displayFingerprint(value)
+} 
 
 export const getFingerprintLength = (fingerprint: Fingerprint): number => {
   if (!isFingerprint(fingerprint)) {
@@ -76,6 +92,13 @@ export const analyzeFingerprintedName = (fingerprintedName: FingerprintedName): 
   return { fingerprintedName, name, nameLength, fingerprint, fingerprintLength, totalLength }
 } 
 
+export const toPrimaryName = (name: Name) : PrimaryName => {
+  if (!isName(name)) {
+    throw new Error("Invalid Name")
+  }
+  return nameToPrimaryChars(name)
+}
+
 export const nameBelongsToPrimaryKey = async (name: Name | FingerprintedName, primaryKey: PrimaryKey): Promise<boolean> => {
   if (isFingerprintedName(name)) {
     const [n, fingerprint] = splitFingerprintedName(name)
@@ -86,13 +109,22 @@ export const nameBelongsToPrimaryKey = async (name: Name | FingerprintedName, pr
   }
 }
 
-export const primaryKeyToFingerprint = async (primaryKey: PrimaryKey, l?: number): Promise<Fingerprint> => {
+export const primaryKeyToFingerprint = async (primaryKey: PrimaryKey): Promise<Fingerprint> => {
   if (!isPrimaryKey(primaryKey)) {
     throw new Error("Invalid PrimaryKey")
   }
-  const primaryChars = await hashToPrimaryChars(primaryKey)
-  const s = l ? primaryChars.slice(0, l) : primaryChars
-  return primaryCharsToFingerprint(s)
+  const publicKey = primaryKeyToPublicKey(primaryKey)
+  return await publicKeyToFingerprint(publicKey)
+}
+
+export const sliceFingerprint = (fingerprint: Fingerprint, length?: number): Fingerprint => {
+  if (!isFingerprint(fingerprint)) {
+    throw new Error("Invalid Fingerprint")
+  }
+  if (length === undefined) {
+    return fingerprint
+  }
+  return Array.from(fingerprint).slice(0, length).join("")
 }
 
 export const primaryKeyToFingerprintedName = async (primaryKey: PrimaryKey, name: Name, fingerprintLength?: number): Promise<FingerprintedName> => {
@@ -101,6 +133,18 @@ export const primaryKeyToFingerprintedName = async (primaryKey: PrimaryKey, name
   }
   const l = MIN_FINGERPRINTED_NAME_LENGTH - name.length
   const length = fingerprintLength ?? ((l >= MIN_FINGERPRINT_LENGTH) ? l : MIN_FINGERPRINT_LENGTH)
-  const fingerprint = await primaryKeyToFingerprint(primaryKey, length)
-  return `${ name }${ fingerprint }`
+  const fingerprint = await primaryKeyToFingerprint(primaryKey)
+  const subFingerprint = sliceFingerprint(fingerprint, length)
+  return `${ name }${ subFingerprint }`
+}
+
+export const fingerprintBelongsToPrimaryKey = async (primaryKey: PrimaryKey, fingerprint: Fingerprint): Promise<boolean> => {
+  if (!isPrimaryKey(primaryKey)) {
+    throw new Error("Invalid PrimaryKey")
+  }
+  if (!isFingerprint(fingerprint)) {
+    throw new Error("Invalid Fingerprint")
+  }
+  const primaryKeyFingerprint = await primaryKeyToFingerprint(primaryKey)
+  return primaryKeyFingerprint.startsWith(fingerprint)
 }

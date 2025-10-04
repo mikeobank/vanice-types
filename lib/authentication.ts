@@ -22,18 +22,18 @@ const serialize = (primaryKey: PrimaryKey, name: Name) : string => {
   ].join(delimiter)
 }
 
-const hash = (primaryKey: PrimaryKey, name: Name) => {
+const digest = (primaryKey: PrimaryKey, name: Name) => {
   return sha256(utf8ToBytes(serialize(primaryKey, name)))
 }
 
 export const sign = async (primaryKey: PrimaryKey, name: Name, privateKey: Uint8Array) : Promise<Signature> => {
-  const messageHash = hash(primaryKey, name)
+  const messageHash = digest(primaryKey, name)
   const signature = await signAsync(messageHash, privateKey)
   return signature.toCompactHex()
 }
 
 export const verify = (primaryKey: PrimaryKey, name: Name, signature: Signature): boolean => {
-  const messageHash = hash(primaryKey, name)
+  const messageHash = digest(primaryKey, name)
   return secpVerify(
     hexToBytes(signature),
     messageHash, 

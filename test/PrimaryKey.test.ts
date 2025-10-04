@@ -1,4 +1,4 @@
-import { assertEquals, assertThrows } from "https://deno.land/std@0.203.0/assert/mod.ts"
+import { assertEquals, assertThrows } from "@std/assert"
 import { isPrimaryKey } from "../PrimaryKey.ts"
 import { splitFingerprintedName } from "../Name.ts"
 
@@ -16,9 +16,9 @@ Deno.test("isPrimaryKey", () => {
 })
 
 Deno.test("PrimaryKey", () => {
-  assertEquals(splitFingerprintedName("Mike😊"), ["Mike", "😊"])
+  assertEquals(splitFingerprintedName("Mike😀"), ["Mike", "😀"])
   assertThrows(() => splitFingerprintedName("Mike"))
   assertThrows(() => splitFingerprintedName("$"))
-  assertThrows(() => splitFingerprintedName("$😊"))
+  assertThrows(() => splitFingerprintedName("$😀"))
   assertThrows(() => splitFingerprintedName(""))
 })
