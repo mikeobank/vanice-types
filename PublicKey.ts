@@ -4,6 +4,7 @@ import isUint8Array from "./lib/utils/isUint8Array.ts"
 import isNumber from "./lib/utils/isNumber.ts"
 import { hashToFingerprint, primaryCharsToUint8Array, publicKeyToPrimaryChars } from "./lib/codec.ts"
 import { digest } from "./lib/digest.ts"
+import { type HexString, displayHex } from "./lib/utils/displayHex.ts"
 
 export { type Signature, isSignature, sign, verify, generateKeyPair } from "./lib/authentication.ts"
 
@@ -78,3 +79,16 @@ export const primaryKeyToPublicKey = (primaryKey: PrimaryKey): PublicKey => {
 export const publicKeyToFingerprint = async (publicKey: PublicKey): Promise<Fingerprint> => {
   return hashToFingerprint(await digest(publicKey))
 }
+
+const displayKey = (key: Uint8Array): HexString => {
+  return displayHex(key)
+}
+
+export const displayPublicKey = (publicKey: PublicKey): HexString => {
+  return displayKey(publicKey)
+}
+
+export const displayPrivateKey = (privateKey: PublicKey): HexString => {
+  return displayKey(privateKey)
+}
+
