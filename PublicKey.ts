@@ -1,5 +1,5 @@
 import { type PrimaryKey, isPrimaryKey } from "./PrimaryKey.ts"
-import type { Fingerprint } from "./Name.ts"
+import type { Fingerprint } from "./Fingerprint.ts"
 import isUint8Array from "./lib/utils/isUint8Array.ts"
 import isNumber from "./lib/utils/isNumber.ts"
 import { hashToFingerprint, primaryCharsToUint8Array, publicKeyToPrimaryChars } from "./lib/codec.ts"

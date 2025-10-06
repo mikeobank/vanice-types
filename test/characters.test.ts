@@ -1,36 +1,16 @@
 import { assertEquals } from "@std/assert"
-import { displayEmoji, displayEmojis, normalizeEmoji, normalizeEmojis } from "../lib/characters.ts"
+import { getFingerprintIndex, getFingerprintChar } from "../lib/characters.ts"
 
-Deno.test("normalizeEmoji", () => {
-  assertEquals(normalizeEmoji("❤️"), "❤")
-  assertEquals(normalizeEmoji("✈️"), "✈")
-  assertEquals(normalizeEmoji("⚡️"), "⚡")
-  assertEquals(normalizeEmoji("☕️"), "☕")
-  assertEquals(normalizeEmoji("☀️"), "☀")
-  assertEquals(normalizeEmoji("☔"), "☔")
-  assertEquals(normalizeEmoji("☁️"), "☁")
-  assertEquals(normalizeEmoji("✒"), "✒")
-  assertEquals(normalizeEmoji("☃️"), "☃")
-  assertEquals(normalizeEmoji("😀"), "😀")
+Deno.test("getFingerprintIndex", () => {
+  // Test with valid characters
+  assertEquals(getFingerprintIndex("😀"), 0)
+  assertEquals(getFingerprintIndex("🎄"), 26)
+  assertEquals(getFingerprintIndex("☁"), 30)
 })
 
-Deno.test("normalizeEmojis", () => {
-  assertEquals(normalizeEmojis("❤️✈️⚡️☕️☀️️☔☁️️✒"), "❤✈⚡☕☀☔☁✒")
-})
-
-Deno.test("displayEmoji", () => {
-  assertEquals(displayEmoji("❤"), "❤️")
-  assertEquals(displayEmoji("✈"), "✈️")
-  assertEquals(displayEmoji("⚡"), "⚡️")
-  assertEquals(displayEmoji("☕"), "☕️")
-  assertEquals(displayEmoji("☀"), "☀️")
-  assertEquals(displayEmoji("☔"), "☔️")
-  assertEquals(displayEmoji("☁"), "☁️")
-  assertEquals(displayEmoji("✒"), "✒️")
-  assertEquals(displayEmoji("☃"), "☃️")
-  assertEquals(displayEmoji("😀"), "😀")
-})
-
-Deno.test("displayEmojis", () => {
-  assertEquals(displayEmojis("❤✈⚡☕☀☔☁✒☃😀"), "❤️✈️⚡️☕️☀️☔️☁️✒️☃️😀")
+Deno.test("getFingerprintChar", () => {
+  // Test with valid indices
+  assertEquals(getFingerprintChar(0), "😀")
+  assertEquals(getFingerprintChar(26), "🎄")
+  assertEquals(getFingerprintChar(30), "☁️")
 })

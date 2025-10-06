@@ -1,12 +1,13 @@
 import characters from "./characters.json" with { type: "json" }
-import type { Fingerprint, Name } from "../Name.ts"
+import type { Name } from "../Name.ts"
+import type { Fingerprint } from "../Fingerprint.ts"
 import type { PrimaryChars } from "../PrimaryKey.ts"
 import type { PublicKey } from "../PublicKey.ts"
 import { base32ToUint8Array, decode, encode, uint8ArrayToBase32Array } from "./Base32.ts"
-import { fingerprintAlphabet, primaryAlphabet } from "./characters.ts"
+import { primaryAlphabet } from "./characters.ts"
 
 export const hashToFingerprint = (hash: Uint8Array): Fingerprint => {
-  return encode(uint8ArrayToBase32Array(hash), fingerprintAlphabet)
+  return uint8ArrayToBase32Array(hash)
 }
 
 export const publicKeyToPrimaryChars = (publicKey: PublicKey): PrimaryChars => {

@@ -16,8 +16,15 @@ export default [
   name: "Vanic",
   primaryName: "VAN1C",
   primaryKey: "VAN1C2B5E9HJQPKJADKCK0SD3G7XEHNFYSXKVPQ9CVS6EW8G1N503",
-  fingerprint: "⏰⚡💪🍴🚗🏠🎄🦋👑🏠⭐🌸⚡🚀🎵☀🦋💡✈✈🏁🏁🌙⭐☃✈⚡⚽🚀☁⚽⏰☕💪☃⚡☕🏁🏠🌸☃🦋🏠🔑🦋💡🎵⚡🎄🌙❤🎁",
-  fingerprintedName: "Vanic⏰⚡💪🍴🚗"
+  fingerprint: [
+    31, 14,  4,  2, 12, 17, 26, 29, 19, 17,  5,
+    28, 14, 24, 20, 25, 29, 21, 10, 10,  9,  9,
+    13,  5,  8, 10, 14, 11, 24, 30, 11, 31, 23,
+    4,  8, 14, 23,  9, 17, 28,  8, 29, 17, 18,
+    29, 21, 20, 14, 26, 13,  3, 16
+  ],
+  fingerprintDisplay: "⏰⚡️💪🍴🚗🏠🎄🦋👑🏠⭐🌸⚡️🚀🎵☀️🦋💡✈️✈️🏁🏁🌙⭐☃️✈️⚡️⚽🚀☁️⚽⏰☕️💪☃️⚡️☕️🏁🏠🌸☃️🦋🏠🔑🦋💡🎵⚡️🎄🌙❤️🎁",
+  fingerprintedName: "Vanic⏰⚡️💪🍴🚗"
 },
 {
   privateKey: new Uint8Array([
@@ -36,10 +43,24 @@ export default [
   name: "Mike",
   primaryName: "MIKE",
   primaryKey: "M1KEU95WVH7KND3TUF7HAH0AFJ2E16BB88M3MY3JS7YT84CMW4K03",
-  fingerprint: "✈❤💡🏁🏠💪🌲☕👑⚽🔥🙏🏁☁👍🎉🎁⚡🙏❤🔑🏁🔑🖋🚀🎁☃☂🌸💪🌸😊✈⭐🎵⚡☂💪☕✈🎁🏁🏁💡🚀🌸😊👍🌸🚀☀😊",
-  fingerprintedName: "Mike✈❤💡🏁🏠💪"
+  fingerprint: [
+    10,  3, 21,  9, 17,  4, 26, 23, 19, 11, 15,
+    7,  9, 30,  6, 22, 16, 14,  7,  3, 18,  9,
+    18,  1, 24, 16,  8, 27, 28,  4, 28,  0, 10,
+    5, 20, 14, 27,  4, 23, 10, 16,  9,  9, 21,
+    24, 28,  0,  6, 28, 24, 25,  0
+  ],
+  fingerprintDisplay: "✈️❤️💡🏁🏠💪🎄☕️👑⚽🔥🙏🏁☁️👍🎉🎁⚡️🙏❤️🔑🏁🔑✒️🚀🎁☃️☔️🌸💪🌸😀✈️⭐🎵⚡️☔️💪☕️✈️🎁🏁🏁💡🚀🌸😀👍🌸🚀☀️😀",
+  fingerprintedName: "Mike✈️❤️💡🏁🏠💪"
 }
 ]
+
+/*
+import { displayFingerprint } from "../Fingerprint.ts"
+import { primaryKeyToFingerprint } from "../PrimaryKey.ts"
+console.log(displayFingerprint(await primaryKeyToFingerprint("VAN1C2B5E9HJQPKJADKCK0SD3G7XEHNFYSXKVPQ9CVS6EW8G1N503")))
+console.log(displayFingerprint(await primaryKeyToFingerprint("M1KEU95WVH7KND3TUF7HAH0AFJ2E16BB88M3MY3JS7YT84CMW4K03")))
+*/
 
 /*
 import { primaryKeyToFingerprint, primaryKeyToFingerprintedName } from "../Name.ts"

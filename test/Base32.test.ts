@@ -1,6 +1,6 @@
 import { assertEquals } from "@std/assert"
 import { encode, decode, uint8ArrayToBase32Array, base32ToUint8Array } from "../lib/Base32.ts"
-import { fingerprintAlphabet, primaryAlphabet } from "../lib/characters.ts"
+import { primaryAlphabet } from "../lib/characters.ts"
 
 Deno.test("base32 encode, decode", () => {
   const arr = new Uint8Array([177, 70])
@@ -24,11 +24,3 @@ Deno.test("encoding roundtrip primaryAlphabet", () => {
   const decoded = decode(encoded, primaryAlphabet)
   assertEquals(decoded, original)
 })
-
-Deno.test("encoding roundtrip fingerprintAlphabet", () => {
-  const original = uint8ArrayToBase32Array(new Uint8Array(32).fill(1))
-  const encoded = encode(original, fingerprintAlphabet)
-  const decoded = decode(encoded, fingerprintAlphabet)
-  assertEquals(decoded, original)
-})
-

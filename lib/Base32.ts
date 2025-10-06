@@ -2,9 +2,9 @@ import isNumber from "./utils/isNumber.ts"
 import isString from "./utils/isString.ts"
 import getUTF8StringLength from "./utils/getUTF8StringLength.ts"
 
-type Base32 = number
-type Base32Array = Base32[]
-type Base32Alphabet = string
+export type Base32 = number
+export type Base32Array = Base32[]
+export type Base32Alphabet = string
 
 export const isBase32 = (value: unknown): value is Base32 => {
   return isNumber(value) && Number.isInteger(value) && value >= 0 && value < 32
